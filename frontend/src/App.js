@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 // Components
 import Navbar from "./components/Navbarcomp";
-import SideDrawer from "./components/SideDrawer";
-import Backdrop from "./components/Backdrop";
 
 // Screens
 import HomeScreen from "./Screens/HomeScreen";
@@ -16,14 +14,9 @@ import RegisterScreen from "./Screens/RegisterScreen";
 import PrivateRoute from "./Screens/routesp/privateroutes";
 
 function App() {
-  const [sideToggle, setSideToggle] = useState(false);
-
   return (
     <Router>
-
-      <Navbar click={() => setSideToggle(true)} />
-      <SideDrawer show={sideToggle} click={() => setSideToggle(false)} />
-      <Backdrop show={sideToggle} click={() => setSideToggle(false)} />
+      <Navbar  />
       <main className="app">
         <Switch>
           <Route exact path="/login"component={LoginScreen}/>
