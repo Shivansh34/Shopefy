@@ -5,11 +5,11 @@ import { useSelector } from "react-redux";
 const SideDrawer = ({ show, click }) => {
   const sideDrawerClass = ["sidedrawer"];
 
-  const cart = useSelector((state) => state.cart);
+  const cart = useSelector((state) => state.getcart);
   const { cartItems } = cart;
 
   const getCartCount = () => {
-    return cartItems.reduce((qty, item) => Number(item.qty) + qty, 0);
+    return 0;
   };
 
   if (show) {

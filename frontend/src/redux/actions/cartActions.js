@@ -1,29 +1,70 @@
 import * as actionTypes from "../constants/cartConstants";
+import {logout} from '../actions/authActions';
 import axios from "axios";
 
+
+export const getCart=()=>async(dispatch,getState)=>{
+  const config ={
+    headers:{
+      'Content-Type': 'application/json',
+      'token': JSON.parse(localStorage.getItem("user")).user.token,
+    }
+  }
+  try {
+    dispatch({type:actionTypes.GET_CART_REQUEST});
+    const {data} = await axios.post('/api/private/cart',{},config).catch((error)=>{if(error.response.status===401){
+      dispatch(logout());
+    }
+    throw(error);});
+    dispatch({type:actionTypes.GET_CART_SUCCESS,payload:data});
+  } catch (error) {
+    dispatch({
+      type:actionTypes.GET_CART_FAIL,
+      payload:(error.response && error.response.data && error.response.data.message) ||error.message,
+    });
+  }
+}
+
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-  const { data } = await axios.get(`/api/products/${id}`);
-
-  dispatch({
-    type: actionTypes.ADD_TO_CART,
-    payload: {
-      product: data._id,
-      name: data.name,
-      imageUrl: data.imageUrl,
-      price: data.price,
-      countInStock: data.countInStock,
-      qty,
-    },
-  });
-
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+  const config ={
+    headers:{
+      'Content-Type': 'application/json',
+      'token': getState().getuser.user.token,
+    }
+  }
+  try {
+    await axios.post('/api/private/cart/add',{productid:id,qty},config).catch((error)=>{
+      if(error.response.status===401){
+        dispatch(logout());
+      }
+      throw(error);});
+      dispatch(getCart());
+  } catch (error) {
+    dispatch({
+      type:actionTypes.GET_CART_FAIL,
+      payload:(error.response && error.response.data && error.response.data.message) ||error.message,
+    });
+  }
 };
 
-export const removeFromCart = (id) => (dispatch, getState) => {
-  dispatch({
-    type: actionTypes.REMOVE_FROM_CART,
-    payload: id,
-  });
-
-  localStorage.setItem("cart", JSON.stringify(getState().cart.cartItems));
+export const updateCart = (id,qty) => async (dispatch, getState) => {
+  const config ={
+    headers:{
+      'Content-Type': 'application/json',
+      'token': JSON.parse(localStorage.getItem("user")).user.token,
+    }
+  }
+  try {
+    await axios.post('/api/private/cart/update',{cartitemid:id,qty:qty},config).catch((error)=>{if(error.response.status===401){
+      dispatch(logout());
+    }
+    throw(error);});
+    dispatch(getCart());
+  } catch (error) {
+    dispatch({
+      type:actionTypes.GET_CART_FAIL,
+      payload:(error.response && error.response.data && error.response.data.message) ||error.message,
+    });
+  }
+  
 };

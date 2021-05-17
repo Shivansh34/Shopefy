@@ -1,33 +1,26 @@
 import * as actionTypes from "../constants/cartConstants";
 
-const CART_INITIAL_STATE = {
-  cartItems: [],
-};
+// var CART_INITIAL_STATE = ;
 
-export const cartReducer = (state = CART_INITIAL_STATE, action) => {
+export const cartReducer = (state = {cartItems: [],loading:true,message:""}, action) => {
   switch (action.type) {
-    case actionTypes.ADD_TO_CART:
-      const item = action.payload;
-
-      const existItem = state.cartItems.find((x) => x.product === item.product);
-
-      if (existItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((x) =>
-            x.product === existItem.product ? item : x
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [...state.cartItems, item],
-        };
-      }
-    case actionTypes.REMOVE_FROM_CART:
+    case actionTypes.GET_CART_REQUEST:
       return {
         ...state,
-        cartItems: state.cartItems.filter((x) => x.product !== action.payload),
+        message:"loading"
+      };
+    case actionTypes.GET_CART_SUCCESS:
+      return{
+        ...state,
+        loading:false,
+        cartItems:action.payload,
+        message:"succes",
+      };
+    case actionTypes.GET_CART_FAIL:
+      return{
+        loading:false,
+        cartItems:[],
+        message:action.payload,
       };
     default:
       return state;

@@ -1,28 +1,30 @@
 import "./CartScreen.css";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
+import {useEffect} from 'react';
 // Components
 import CartItem from "../components/CartItem";
 
 // Actions
-import { addToCart, removeFromCart } from "../redux/actions/cartActions";
+import { getCart,updateCart } from "../redux/actions/cartActions";
 
 const CartScreen = () => {
   const dispatch = useDispatch();
 
-  const cart = useSelector((state) => state.cart);
-  const { cartItems } = cart;
-
-  useEffect(() => {}, []);
+  const getcart = useSelector((state) => state.getcart);
+  console.log(getcart);
+  var { cartItems } = getcart;
+  console.log(cartItems);
+  useEffect(()=>{
+    dispatch(getCart());
+  },[dispatch]);
 
   const qtyChangeHandler = (id, qty) => {
-    dispatch(addToCart(id, qty));
+    dispatch(updateCart(id, qty));
   };
 
   const removeFromCartHandler = (id) => {
-    dispatch(removeFromCart(id));
+    dispatch(qtyChangeHandler(id,0));
   };
 
   const getCartCount = () => {
@@ -48,7 +50,7 @@ const CartScreen = () => {
           ) : (
             cartItems.map((item) => (
               <CartItem
-                key={item.product}
+                key={item.id}
                 item={item}
                 qtyChangeHandler={qtyChangeHandler}
                 removeHandler={removeFromCartHandler}

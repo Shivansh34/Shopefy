@@ -1,11 +1,11 @@
 import "./CartItem.css";
 import { Link } from "react-router-dom";
 
-const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
+const CartItem = ({ item, qtyChangeHandler}) => {
   return (
     <div className="cartitem">
       <div className="cartitem__image">
-        <img src={item.imageUrl} alt={item.name} />
+        <img src={item.imageurl} alt={item.name} />
       </div>
       <Link to={`/product/${item.product}`} className="cartItem__name">
         <p>{item.name}</p>
@@ -13,10 +13,10 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
       <p className="cartitem__price">${item.price}</p>
       <select
         value={item.qty}
-        onChange={(e) => qtyChangeHandler(item.product, e.target.value)}
+        onChange={(e) => qtyChangeHandler(item.id, e.target.value)}
         className="cartItem__select"
       >
-        {[...Array(item.countInStock).keys()].map((x) => (
+        {[...Array(item.cis).keys()].map((x) => (
           <option key={x + 1} value={x + 1}>
             {x + 1}
           </option>
@@ -24,7 +24,7 @@ const CartItem = ({ item, qtyChangeHandler, removeHandler }) => {
       </select>
       <button
         className="cartItem__deleteBtn"
-        onClick={() => removeHandler(item.product)}
+        onClick={() => qtyChangeHandler(item.id,0)}
       >
         <i className="fas fa-trash"></i>
       </button>

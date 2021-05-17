@@ -8,23 +8,26 @@ import {
   getProductsReducer,
   getProductDetailsReducer,
 } from "./reducers/productReducers";
+import {messageReducer} from "./reducers/messageReducer";
+import {authReducer} from './reducers/authReducer';
 
 const reducer = combineReducers({
-  cart: cartReducer,
+  getuser: authReducer,
+  getcart: cartReducer,
+  getmessage: messageReducer,
   getProducts: getProductsReducer,
   getProductDetails: getProductDetailsReducer,
 });
 
 const middleware = [thunk];
 
-const cartItemsInLocalStorage = localStorage.getItem("cart")
-  ? JSON.parse(localStorage.getItem("cart"))
-  : [];
+const user = localStorage.getItem("user")
+  ? JSON.parse(localStorage.getItem("user"))
+  :{ isLoggedIn: false, user: null } ;
 
 const INITIAL_STATE = {
-  cart: {
-    cartItems: cartItemsInLocalStorage,
-  },
+  getuser: user
+  ,
 };
 
 const store = createStore(
