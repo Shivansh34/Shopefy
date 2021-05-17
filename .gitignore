@@ -21,10 +21,10 @@ debug.log
 .env.test.local
 .env.production.local
 
-frontend/.eslintcache
-
+**/.eslintcache
 **/debug.log
 **/*.log
+frontend/README.md
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
