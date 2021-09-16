@@ -1,3 +1,2 @@
 # Shopify
-A shopping website with jwt-auth made on MERN stack
-
+A shopping website based on MERN stack with user login and cart facilities.
