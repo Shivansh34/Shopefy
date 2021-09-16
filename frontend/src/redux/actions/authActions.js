@@ -13,7 +13,7 @@ export const register =  (email,firstname,lastname, password) => async  (dispatc
           type: actionTypes.SET_MESSAGE,
           payload: "Creating profile"
       })
-      const {data} = await axios.post('api/auth/register',{firstname,lastname,email,password},config).catch((error)=>{throw(error);});
+      const {data} = await axios.post('api/auth/register',{firstname,lastname,email,password},config).catch((error)=>{});
       dispatch({
         type: actionTypes.REGISTER_SUCCESS,
       });

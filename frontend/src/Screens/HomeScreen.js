@@ -1,12 +1,16 @@
-import "./HomeScreen.css";
+import Carousel from 'react-material-ui-carousel'
+import { CardMedia, Card } from '@material-ui/core';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // Components
-import Product from "../components/Product";
-
+//import Product from "../components/Product";
 //Actions
 import { getProducts as listProducts } from "../redux/actions/productActions";
+
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -19,10 +23,52 @@ const HomeScreen = () => {
   useEffect(() => {
     dispatch(listProducts());
   }, [dispatch]);
+  var items = [
+    {
+        name: "Random Name #1",
+        description: "Probably the most random thing you have ever seen!",
+        url:"https://images.pexels.com/photos/2528118/pexels-photo-2528118.jpeg"
+    },
+    {
+        name: "Random Name #2",
+        description: "Hello World!",
+        url:"https://images.pexels.com/photos/2528118/pexels-photo-2528118.jpeg"
+    }
+]
 
   return (
-    <div className="homescreen">
-      <h2 className="homescreen__title">Latest Products</h2>
+    <div style={{margin: "1rem auto",maxWidth: "1300px"}}>
+      <Carousel swipe={true} navButtonsAlwaysVisible={true} animation="slide">
+        {
+          items.map( (item, i) => <Item key={i} item={item} /> )
+        }
+      </Carousel>
+      <ImageList sx={{ width: "auto"}} cols={4} gap={50}>
+      {loading ? (
+          <h2>Loading...</h2>
+        ) : error ? (
+          <h2>{error}</h2>
+        ) : (
+          products.map((product) => (
+          <ImageListItem key={product._id} >
+            <a  href={`/product/${product._id}`} style={{ textDecoration: 'none', color:'black'}}>
+            <img
+              src={product.imageUrl}
+              srcSet={product.imageUrl}
+              alt={product.name}
+              loading="lazy"
+              style={{height:'200px'}}
+            />
+            <ImageListItemBar
+              title={product.name}
+              subtitle={"Rs. "+product.price}
+              position="below"
+            />
+            </a>
+          </ImageListItem>
+        )))}
+      </ImageList>
+      {/* <h2 className="homescreen__title">Latest Products</h2>
       <div className="homescreen__products">
         {loading ? (
           <h2>Loading...</h2>
@@ -40,9 +86,23 @@ const HomeScreen = () => {
             />
           ))
         )}
-      </div>
+      </div> */}
     </div>
   );
 };
+
+function Item(props)
+{
+    return (<>
+          <Card>
+            <CardMedia
+            component="img"
+            height="400"
+            image={props.item.url}
+           />
+          </Card>
+        </>
+    )
+}
 
 export default HomeScreen;
