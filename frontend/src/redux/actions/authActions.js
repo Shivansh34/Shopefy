@@ -69,7 +69,7 @@ export const login = (email, password) => async (dispatch,getState) => {
         type: actionTypes.SET_MESSAGE,
         payload: "Logged In",
       });
-      localStorage.setItem("user",JSON.stringify(getState().getuser)); 
+      localStorage.setItem("user",JSON.stringify(getState().getuser));
   }
   catch (error) {
       const message =(error.response && error.response.data && error.response.data.message) ||error.message ||error.toString();

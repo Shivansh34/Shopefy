@@ -4,7 +4,7 @@ import { AccountCircle} from '@material-ui/icons';
 import MenuIcon from '@material-ui/icons/Menu';
 import { useSelector,useDispatch } from "react-redux";
 import {logout} from '../redux/actions/authActions';
-import { useEffect, useState } from 'react';
+import { /*useEffect,*/ useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -26,9 +26,9 @@ const Navbarcomp = ({ click }) => {
   const user = useSelector((state)=> state.getuser);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  useEffect(()=>{
-    console.log(user);
-  },[user])
+  // useEffect(()=>{
+  //   console.log(user);
+  // },[user])
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -78,7 +78,7 @@ const Navbarcomp = ({ click }) => {
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose} to="cart">Cart</MenuItem>
+                <MenuItem onClick={handleClose} component="a" href="/cart">Cart</MenuItem>
                 <MenuItem onClick={Logout}>Logout</MenuItem>
               </Menu>
             </div>
