@@ -79,10 +79,11 @@ const Navbarcomp = ({ click }) => {
               >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
                 <MenuItem onClick={handleClose} component="a" href="/cart">Cart</MenuItem>
+
                 <MenuItem onClick={Logout}>Logout</MenuItem>
               </Menu>
             </div>
-          ):<Button color="inherit" href="login">Login</Button>}
+          ):<Button color="inherit" component={Link} to="/login">Login</Button>}
       </Toolbar>
     </AppBar>
   //   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
