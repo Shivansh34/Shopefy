@@ -19,7 +19,7 @@ if(process.env.NODE_ENV==='development'){
 }
 
 app.get("/", (req, res) => {
-  res.json({ message: "API running..." });
+	res.sendFile(path.join(__dirname, '../frontend/build/index.html'));
 });
 
 app.use("/api/products", productRoutes);
@@ -27,6 +27,8 @@ app.use("/api/auth",authRoutes);
 app.use("/api/private",privateRoutes);
 
 app.use(errorHandler);
+
+app.use(express.static('frontend/build'));
 
 const PORT = process.env.PORT || 5000;
 
