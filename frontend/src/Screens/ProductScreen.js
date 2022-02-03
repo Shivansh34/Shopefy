@@ -48,6 +48,10 @@ const ProductScreen = ({ match, history }) => {
   let chartData=[{star:"5",reviews:0},{star:"4",reviews:0},{star:"3",reviews:0},{star:"2",reviews:0},{star:"1",reviews:0},];
 
   const addToCartHandler = () => {
+    if(localStorage.getItem('user')&&localStorage.getItem('user').isloggedin){
+      history.push('/login');
+      return;
+    }
     dispatch(addToCart(product._id, qty));
     console.log('added');
     history.push(`/cart`);

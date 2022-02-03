@@ -24,12 +24,17 @@ app.use("/api/products", productRoutes);
 app.use("/api/auth",authRoutes);
 app.use("/api/private",privateRoutes);
 
-app.use(errorHandler);
-app.route("/*").get((req, res) => {
-	res.sendFile(path.join(path.resolve('./'), '/frontend/build/index.html'));
+app.use(express.static(path.join(path.resolve('./'), 'frontend/build')));
+app.route('/*').get((req, res) => {
+	res.sendFile(path.join(path.resolve('./'), 'frontend/build/index.html'));
 });
 
-app.use(express.static('frontend/build'));
+// app.use(express.static("build"));
+// app.get("/", (req, res) => {
+//   res.sendFile(path.resolve(path.resolve('./'), "frontend" ,"build", "index.html"));
+// });
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
 

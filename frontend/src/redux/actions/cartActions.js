@@ -29,7 +29,7 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
   const config ={
     headers:{
       'Content-Type': 'application/json',
-      'token': getState().getuser.user.token,
+      'token': JSON.parse(localStorage.getItem("user")).user.token,
     }
   }
   try {

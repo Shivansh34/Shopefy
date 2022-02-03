@@ -23,7 +23,7 @@ function App() {
           <Route exact path="/register" component={RegisterScreen}/>
           <Route exact path="/" component={HomeScreen} />
           <Route exact path="/product/:id" component={ProductScreen} />
-          <Route exact path="/product/:id/addreview" component={ReviewScreen} />
+          <PrivateRoute exact path="/product/:id/addreview" component={ReviewScreen} />
           <PrivateRoute exact path="/cart" component={CartScreen} />
         </Switch>
       </main>
