@@ -19,16 +19,16 @@ if(process.env.NODE_ENV==='development'){
   }));
 }
 
-app.get("/", (req, res) => {
-  console.log(path.join(path.resolve('./'), '/frontend/build/index.html'));
-	res.sendFile(path.join(path.resolve('./'), '/frontend/build/index.html'));
-});
 
 app.use("/api/products", productRoutes);
 app.use("/api/auth",authRoutes);
 app.use("/api/private",privateRoutes);
 
 app.use(errorHandler);
+app.get("/*", (req, res) => {
+  console.log(path.join(path.resolve('./'), '/frontend/build/index.html'));
+	res.sendFile(path.join(path.resolve('./'), '/frontend/build/index.html'));
+});
 
 app.use(express.static('frontend/build'));
 
