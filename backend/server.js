@@ -6,6 +6,7 @@ const privateRoutes = require("./routes/private");
 const connectDB = require("./config/db");
 const cors = require("cors");
 const errorHandler = require('./middleware/error');
+const path = require("path");
 
 connectDB();
 
@@ -19,7 +20,7 @@ if(process.env.NODE_ENV==='development'){
 }
 
 app.get("/", (req, res) => {
-	res.sendFile(path.join(process.cwd(), '/frontend/build/index.html'));
+	res.sendFile(path.join(path.resolve('../'), '/frontend/build/index.html'));
 });
 
 app.use("/api/products", productRoutes);
