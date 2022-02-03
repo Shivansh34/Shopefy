@@ -20,7 +20,8 @@ if(process.env.NODE_ENV==='development'){
 }
 
 app.get("/", (req, res) => {
-	res.sendFile(path.join(path.resolve('../'), '/frontend/build/index.html'));
+  console.log(path.join(path.resolve('./'), '/frontend/build/index.html'));
+	res.sendFile(path.join(path.resolve('./'), '/frontend/build/index.html'));
 });
 
 app.use("/api/products", productRoutes);
