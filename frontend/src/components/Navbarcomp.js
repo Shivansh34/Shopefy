@@ -48,7 +48,7 @@ const Navbarcomp = ({ click }) => {
         </IconButton>
         <Typography variant="h6" className={classes.title} > 
         <Link to="/" style={{textDecoration:'None',color:'white'}}>
-          Shopefy
+          Tyntra
         </Link>
         </Typography>
         {(user.isLoggedIn)? (
