@@ -21,8 +21,8 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://shopify.com/">
-        Shoppify
+      <Link color="inherit" href="https://shopefy.herokuapp.com/">
+        Shopefy
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
