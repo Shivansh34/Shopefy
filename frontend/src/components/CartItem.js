@@ -10,7 +10,7 @@ const CartItem = ({ item, qtyChangeHandler}) => {
       <Link to={`/product/${item.product}`} className="cartItem__name">
         <p>{item.name}</p>
       </Link>
-      <p className="cartitem__price">${item.price}</p>
+      <p className="cartitem__price">Rs. {item.price}</p>
       <select
         value={item.qty}
         onChange={(e) => qtyChangeHandler(item.id, e.target.value)}

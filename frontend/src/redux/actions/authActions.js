@@ -89,5 +89,5 @@ export const logout = () =>async (dispatch,getState) => {
   dispatch({
     type: actionTypes.LOGOUT,
   });
-  localStorage.setItem("user",JSON.stringify(getState().getuser)); 
+  localStorage.setItem("user",JSON.stringify("")); 
 };

@@ -1,16 +1,39 @@
-import {Form,Alert,Button} from 'react-bootstrap';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import {Container,Alert} from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {useState,useEffect} from 'react';
 import {useSelector,useDispatch} from 'react-redux';
 import {register} from '../redux/actions/authActions';
 import * as actionTypes from '../redux/constants/authConstants';
 
+function Copyright(props) {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center" {...props}>
+        {'Copyright © '}
+        <Link color="inherit" href="https://shopify.com/">
+          Shoppify
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+
 const RegisterScreen = ({history})=>{
     const {message} = useSelector(state => state.getmessage);
     const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
-    const [firstname, setfirstname] = useState("");
-    const [lastname,setlastname] = useState("");
-    const [password, setPassword] = useState("");
+    const theme = createTheme();
+
     useEffect(()=>{
         const user = JSON.parse(localStorage.getItem("user"));
         if(user&&user.token){
@@ -21,32 +44,96 @@ const RegisterScreen = ({history})=>{
 
     const registerhandler = async (e)=>{
         e.preventDefault();
-        dispatch(register(email,firstname,lastname,password));
+        const data = await new FormData(e.currentTarget);
+        dispatch(register(data.get('email'),data.get('firstname'),data.get('lastname'),data.get('password')));
     }
     return (<>
-        {message!==""?(<Alert variant='info'>{message}</Alert>):<div></div>}
-        <Form onSubmit={registerhandler}>
-        <Form.Group controlId="formGroupEmail">
-            <Form.Label>Email address*</Form.Label>
-            <Form.Control required type="email" placeholder="Enter email" value={email} onChange={(e)=>setEmail(e.target.value)} />
-        </Form.Group>
-        <Form.Group controlId="formGroupFirstname">
-            <Form.Label>First Name*</Form.Label>
-            <Form.Control required type="text" placeholder="Enter firstname" value={firstname} onChange={(e)=>setfirstname(e.target.value)} />
-        </Form.Group>
-        <Form.Group controlId="formGroupLastname">
-            <Form.Label>Last Name</Form.Label>
-            <Form.Control type="text" placeholder="Enter lastname" value={lastname} onChange={(e)=>setlastname(e.target.value)} />
-        </Form.Group>
-        <Form.Group controlId="formGroupPassword">
-            <Form.Label>Password*</Form.Label>
-            <Form.Control required type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-            Submit
-        </Button>
-        </Form>
-    </>);
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+            sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
+            >
+            <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+                Sign Up
+            </Typography>
+            <Box component="form" onSubmit={registerhandler} noValidate sx={{ mt: 1 }}>
+                {message!==""?(<Alert variant='info'>{message}</Alert>):<div></div>}
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                />
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="firstname"
+                label="First Name"
+                name="firstname"
+                autoComplete="firstname"
+                autoFocus
+                />
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                id="lastname"
+                label="Last Name"
+                name="lastname"
+                autoComplete="lastname"
+                autoFocus
+                />
+                <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                />
+                <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                >
+                Sign Up
+                </Button>
+                <Grid container>
+                <Grid item xs>
+                    <Link href="#" variant="body2">
+                    Forgot password?
+                    </Link>
+                </Grid>
+                <Grid item>
+                    <Link href="/login" variant="body2">
+                    {"Already have an account? Sign In"}
+                    </Link>
+                </Grid>
+                </Grid>
+            </Box>
+            </Box>
+            <Copyright sx={{ mt: 8, mb: 4 }} />
+        </Container>
+        </ThemeProvider>
+    </>
+    );
 }
 
 export default RegisterScreen;
