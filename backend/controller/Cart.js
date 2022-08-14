@@ -70,3 +70,25 @@ exports.addtocart = async (req,res,next) =>{
         next(error);
     }
 }
+
+exports.getprofile=async(req,res,next)=>{
+    try{
+        //console.log(cartom);
+        res.status(200).json({"firstname":req.user.firstname,"lastname":req.user.lastname,"address":req.user.address});
+    }
+    catch(error){
+        next(error);
+    }
+}
+
+exports.updateprofile=async(req,res,next)=>{
+    try{
+        //console.log(cartom);
+        const {firstname,lastname,address}=req.body;
+        const user = await User.findByIdAndUpdate({_id:req.user._id},{firstname,lastname,address});
+        res.status(200).json({firstname:user.firstname,lastname:user.lastname,address:user.address});
+    }
+    catch(error){
+        next(error);
+    }
+}

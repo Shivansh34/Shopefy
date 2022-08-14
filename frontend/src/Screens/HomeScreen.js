@@ -26,13 +26,13 @@ const HomeScreen = () => {
   var items = [
     {
         name: "Random Name #1",
-        description: "Probably the most random thing you have ever seen!",
-        url:"https://images.pexels.com/photos/2528118/pexels-photo-2528118.jpeg"
+        description: "Sale",
+        url:"https://cdn.arstechnica.net/wp-content/uploads/2021/09/iPhone-13-Pro-Max-back.jpeg"
     },
     {
         name: "Random Name #2",
         description: "Hello World!",
-        url:"https://images.pexels.com/photos/2528118/pexels-photo-2528118.jpeg"
+        url:"https://www.trustedreviews.com/wp-content/uploads/sites/54/2021/10/Macbook-Pro-2021-920x613.jpg"
     }
 ]
 

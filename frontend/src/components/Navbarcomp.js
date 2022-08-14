@@ -44,7 +44,7 @@ const Navbarcomp = ({ click }) => {
     <AppBar position="static">
       <Toolbar>
         <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-          <MenuIcon />
+          
         </IconButton>
         <Typography variant="h6" className={classes.title} > 
         <Link to="/" style={{textDecoration:'None',color:'white'}}>
@@ -77,7 +77,7 @@ const Navbarcomp = ({ click }) => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
+                <MenuItem onClick={handleClose}component="a" href="/profile">Profile</MenuItem>
                 <MenuItem onClick={handleClose} component="a" href="/cart">Cart</MenuItem>
 
                 <MenuItem onClick={Logout}>Logout</MenuItem>
@@ -86,66 +86,6 @@ const Navbarcomp = ({ click }) => {
           ):<Button color="inherit" component={Link} to="/login">Login</Button>}
       </Toolbar>
     </AppBar>
-  //   <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-    
-  //   <Navbar.Brand href="/" >Shopify</Navbar.Brand>
-    
-  //   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  //   <Navbar.Collapse id="responsive-navbar-nav">
-  //     <Nav className="mr-auto">
-  //     </Nav>
-  //     <Nav>
-  //       <Form className="d-flex">
-  //       <FormControl
-  //         type="search"
-  //         placeholder="Search"
-  //         className="mr-2"
-  //         aria-label="Search"
-  //       />
-  //       <Button variant="outline-success">Search</Button>
-  //       <NavDropdown title={(user.isLoggedIn)?(<> {user.user.firstname+" "+user.user.lastname}</>):(<>Log In</>)} id="collasible-nav-dropdown">{
-  //         (!user.isLoggedIn)?(
-  //         <>
-  //         <NavDropdown.Item href="cart">Login</NavDropdown.Item>
-  //         </>
-  //         ):(
-  //         <>
-  //         <NavDropdown.Item href="cart">Cart</NavDropdown.Item>
-  //         <NavDropdown.Divider />
-  //         <NavDropdown.Item onClick={Logout}>Log Out</NavDropdown.Item>
-  //         </>
-  //         )
-  //       }
-  //       </NavDropdown>
-  //     </Form>
-  //     </Nav>
-  //   </Navbar.Collapse>
-  // </Navbar>
-    //  <nav className="navbar">
-    //   <div className="navbar__logo">
-    //     <h2>MERN Shopping Cart</h2>
-    //   </div>
-
-    //   <ul className="navbar__links">
-    //     <li>
-    //       <Link to="/cart" className="cart__link">
-    //         <i className="fas fa-shopping-cart"></i>
-    //         <span>
-    //           Cart <span className="cartlogo__badge">{getCartCount()}</span>
-    //         </span>
-    //       </Link>
-    //     </li>
-    //     <li>
-    //       <Link to="/">Shop</Link>
-    //     </li>
-    //   </ul>
-
-    //   <div className="hamburger__menu" onClick={click}>
-    //     <div></div>
-    //     <div></div>
-    //     <div></div>
-    //   </div>
-    // </nav> 
   );
 };
 
